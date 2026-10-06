@@ -9,7 +9,7 @@ use crate::app::state::AppState;
 #[derive(Debug, Clone, Serialize)]
 #[serde(tag = "type")]
 pub enum InputEvent {
-    KeyEvent { pressed: bool, name: String },
+    KeyEvent { pressed: bool, name: String, caps_lock: bool },
     MouseButtonEvent { pressed: bool, button: MouseButton },
     MouseMoveEvent { x: f64, y: f64 },
     MouseWheelEvent { delta_x: i64, delta_y: i64 },
@@ -30,6 +30,18 @@ pub fn map_mouse_button(button: Button) -> MouseButton {
         Button::Middle => MouseButton::Middle,
         _ => MouseButton::Other,
     }
+}
+
+// Caps Lock toggle state, read when the event is emitted
+#[cfg(target_os = "windows")]
+fn caps_lock_on() -> bool {
+    use windows::Win32::UI::Input::KeyboardAndMouse::{GetKeyState, VK_CAPITAL};
+    unsafe { GetKeyState(VK_CAPITAL.0 as i32) & 1 != 0 }
+}
+
+#[cfg(not(target_os = "windows"))]
+fn caps_lock_on() -> bool {
+    false
 }
 
 pub fn start_listener(app_handle: AppHandle, toggle_menu_item: MenuItem<Wry>) {
@@ -78,6 +90,7 @@ pub fn start_listener(app_handle: AppHandle, toggle_menu_item: MenuItem<Wry>) {
                                     InputEvent::KeyEvent {
                                         pressed: false,
                                         name: key_name.clone(),
+                                        caps_lock: false,
                                     },
                                 )
                                 .unwrap()
@@ -101,10 +114,12 @@ pub fn start_listener(app_handle: AppHandle, toggle_menu_item: MenuItem<Wry>) {
                 EventType::KeyPress(key) => Some(InputEvent::KeyEvent {
                     pressed: true,
                     name: format!("{:?}", key),
+                    caps_lock: caps_lock_on(),
                 }),
                 EventType::KeyRelease(key) => Some(InputEvent::KeyEvent {
                     pressed: false,
                     name: format!("{:?}", key),
+                    caps_lock: caps_lock_on(),
                 }),
                 EventType::ButtonPress(button) => Some(InputEvent::MouseButtonEvent {
                     pressed: true,

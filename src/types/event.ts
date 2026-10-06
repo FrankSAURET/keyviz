@@ -8,6 +8,8 @@ export interface RawKeyEvent {
   type: "KeyEvent";
   pressed: boolean;
   name: string;
+  // Caps Lock toggle state (Windows only, false elsewhere)
+  caps_lock?: boolean;
 }
 
 export interface MouseButtonEvent {
@@ -144,6 +146,7 @@ export const RawKey = {
   LeftBracket: "LeftBracket",
   RightBracket: "RightBracket",
   BackSlash: "BackSlash",
+  IntlBackslash: "IntlBackslash",
   SemiColon: "SemiColon",
   Quote: "Quote",
   Comma: "Comma",

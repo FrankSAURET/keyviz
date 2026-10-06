@@ -1,5 +1,18 @@
 # Journal des modifications
 
+## 2.1.2 (prochaine publication)
+
+### Nouveauté
+
+- Touche `< >` des claviers ISO (à gauche de W/Z) affichée, et présente dans le filtre des touches.
+- Installeur MSI et version portable (exe seul, sans installation) en plus de l'installeur habituel.
+
+### Modification
+
+- Les lettres suivent aussi Verr. Maj : majuscule avec Verr. Maj ou Maj, minuscule avec les deux (Windows).
+- Numérotation revenue à celle du projet d'origine : 2.1.2 succède à 2.1.1.
+- « Rechercher les mises à jour » ne propose plus une version plus ancienne que celle installée.
+
 ## 2026.10.0 (6 octobre 2026)
 
 ### Nouveauté

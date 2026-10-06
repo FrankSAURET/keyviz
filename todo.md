@@ -1,10 +1,18 @@
 # À faire
 
-1. ⏳ Verr. Maj non pris en compte pour la casse (état de la bascule inconnu côté Rust).
-2. ⏳ Touche `IntlBackslash` (`< >` des claviers ISO) absente de `keymaps.ts` : jamais affichée.
-3. ⏳ Numéro interne à 4 segments (`buildNumber`) pas encore affiché hors production dans « À propos ».
+1. ⏳ Verr. Maj sous macOS et Linux : `caps_lock` toujours faux (seul Windows lit la bascule).
+2. ⏳ Traduction FR des chaînes nouvelles éventuelles (aucune dans ce lot).
 
 # Journal
+
+## v2.1.2 (build 2.1.2.2)
+
+1. ✅ Verr. Maj : `caps_lock_on()` dans `src-tauri/src/app/event.rs` (`GetKeyState(VK_CAPITAL) & 1`, feature `Win32_UI_Input_KeyboardAndMouse`), champ `caps_lock` dans `InputEvent::KeyEvent`. Frontal : majuscule = Maj XOR Verr. Maj (`key_event.ts`).
+2. ✅ `IntlBackslash` : `RawKey`, `keymaps.ts` (« < », symbole « > », ponctuation), bouton dans `custom-filter.tsx` entre Maj gauche et Z.
+3. ✅ « À propos » : `buildNumber` injecté par Vite (`define` `__BUILD_NUMBER__` depuis `package.json`), affiché seulement en développement (`import.meta.env.DEV`). Recherche de mise à jour : comparaison numérique (plus de « nouvelle version » 2.1.1 pour un 2.1.2).
+4. ✅ Version : retour au semver de l'auteur, `2.1.2` (`tauri.conf.json`, `about.tsx`), `buildNumber` `2.1.2.2`. Cibles `"all"` rétablies : MSI construit à nouveau.
+5. ✅ Construction : installeurs NSIS et MSI, version portable (exe seul, WebView2 requis).
+6. ℹ️ Erreur `TS2578` dans `vite.config.ts` (`@ts-expect-error` inutile) : antérieure, non traitée.
 
 ## v2026.10.0 (build 2026.10.0.1) — publication
 

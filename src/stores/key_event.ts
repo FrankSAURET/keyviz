@@ -154,7 +154,9 @@ const createKeyEventStore = createSyncedStore<KeyEventStore>(
 
             let groups = [...state.groups];
             const last = groups.length - 1;
-            const shifted = pressedKeys.includes(RawKey.ShiftLeft) || pressedKeys.includes(RawKey.ShiftRight);
+            // uppercase letter: Shift XOR Caps Lock
+            const shiftDown = pressedKeys.includes(RawKey.ShiftLeft) || pressedKeys.includes(RawKey.ShiftRight);
+            const shifted = shiftDown !== Boolean(event.caps_lock);
             const key = new KeyEvent(event.name, shifted);
 
             // 2. check if pressed again

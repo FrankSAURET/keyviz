@@ -298,6 +298,12 @@ export const keymaps: Record<string, DisplayData> = {
         symbol: "|",
         category: "punctuation",
     },
+    // < > key of ISO keyboards (left of Z)
+    IntlBackslash: {
+        label: "<",
+        symbol: ">",
+        category: "punctuation",
+    },
     SemiColon: {
         label: ";",
         symbol: ":",

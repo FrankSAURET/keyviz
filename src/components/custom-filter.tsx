@@ -227,7 +227,8 @@ export const CustomFilter = () => {
 
             {/* Row 5: ZXCV */}
             <div className="flex gap-2 justify-between w-full">
-              <ButtonKey rawKey={RawKey.ShiftLeft} className="flex-5" flexGrow />
+              <ButtonKey rawKey={RawKey.ShiftLeft} className="flex-3" flexGrow />
+              <ButtonKey rawKey={RawKey.IntlBackslash} />
               <ButtonKey rawKey={RawKey.KeyZ} />
               <ButtonKey rawKey={RawKey.KeyX} />
               <ButtonKey rawKey={RawKey.KeyC} />

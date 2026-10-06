@@ -8,7 +8,20 @@ import { useState } from "react"
 import { toast } from "sonner"
 import { useTranslation } from "react-i18next"
 
-export const VERSION = "2.1.1"
+export const VERSION = "2.1.2"
+
+// internal build number, never shown in production
+const DISPLAY_VERSION = import.meta.env.DEV ? __BUILD_NUMBER__ : VERSION;
+
+// true when `latest` (x.y.z) is strictly newer than `current`
+const isNewer = (latest: string, current: string) => {
+    const a = latest.split(".").map(Number);
+    const b = current.split(".").map(Number);
+    for (let i = 0; i < 3; i++) {
+        if ((a[i] ?? 0) !== (b[i] ?? 0)) return (a[i] ?? 0) > (b[i] ?? 0);
+    }
+    return false;
+}
 
 export const AboutPage = () => {
     const { t } = useTranslation();
@@ -25,8 +38,8 @@ export const AboutPage = () => {
         try {
             const response = await fetch('https://api.github.com/repos/mulaRahul/keyviz/releases/latest')
             const data = await response.json()
-            const latestVersion = data.tag_name.substring(1, 6);
-            if (latestVersion !== VERSION) {
+            const latestVersion = data.tag_name.replace(/^v/, "");
+            if (isNewer(latestVersion, VERSION)) {
                 setUpdateAvailable(true);
                 toast.success(
                     t("New version available: v{{version}}", { version: latestVersion }),
@@ -79,7 +92,7 @@ export const AboutPage = () => {
                 hovered ? "Keyviz Pro" : "Keyviz"
             }</h1>
             <p className="text-center text-sm text-muted-foreground">
-                v{VERSION}-beta <br />
+                v{DISPLAY_VERSION}-beta <br />
                 © 2026 Rahul Mula
             </p>
         </div>

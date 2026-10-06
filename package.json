@@ -2,7 +2,7 @@
   "name": "keyviz",
   "private": true,
   "version": "0.1.0",
-  "buildNumber": "2026.10.0.1",
+  "buildNumber": "2.1.2.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
