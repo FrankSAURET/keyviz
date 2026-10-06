@@ -4,6 +4,14 @@
 
 # Journal
 
+## v2.1.2 (build 2.1.2.5)
+
+1. ✅ Figeage au clic sur l'icône de la zone de notification : les 3 figeages relevés par Windows (événement 1002, 13h36–13h38) viennent tous de l'instance lancée par la case « Launch keyviz » du MSI. Une instance lancée à la main ne fige pas (essayé par Frank).
+2. ✅ Modèle WiX personnalisé `src-tauri/wix/main.wxs` (copie de celui de tauri-cli 2.9.6) sans la case de lancement ; `bundle.windows.wix.template` dans `tauri.conf.json`. L'action `LaunchApplication` reste pour `AUTOLAUNCHAPP` (installation passive).
+3. ✅ NSIS, MSI et portable reconstruits.
+4. ℹ️ Pile du figeage jamais capturée : le guetteur `hangwatch.ps1` (cdb, attache non invasive) est prêt si le défaut revient sur une instance normale.
+5. ℹ️ Le modèle WiX est une copie : à resynchroniser si tauri-cli change le sien.
+
 ## v2.1.2 (build 2.1.2.4) — release
 
 1. ✅ `.github/workflows/build.yml` : lancement manuel (`gh workflow run build.yml -f tag=vX`), DMG universel (macos-latest) et deb/rpm/AppImage (ubuntu-22.04) par `tauri-action`, envoyés dans la release de l'étiquette.
