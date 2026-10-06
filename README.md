@@ -8,6 +8,8 @@
    <img src="https://img.shields.io/badge/platform-Windows%20%7C%20macOS-lightgrey?style=flat-square" alt="Platform Support">
 </div>
 
+**English** · [Français](README.fr.md)
+
 Keyviz is a **free and open-source** tool that visualizes your keypresses and mouse actions in real-time. Let your audience know what handy shortcuts you're pressing during tutorials, presentations, collaborations, or whenever you need.
 
 ## ⌨️ Keypress & 🖱️ Mouse Actions
@@ -28,6 +30,8 @@ Don't settle for defaults. Every aspect of the visualization is under your contr
 - **History:** Keep a visual trail of your recent inputs.
 - **Position:** Move the visualization to any part of your screen.
 - **Animations:** Customize how inputs appear and disappear with preset entry and exit animations.
+- **SVG keyboards:** Key drawings come from one SVG file per keyboard, editable in Inkscape or a text editor.
+- **Language:** English or French interface.
 
 </br>
 
@@ -40,7 +44,7 @@ Don't settle for defaults. Every aspect of the visualization is under your contr
 ### Windows & macOS
 You can download the latest version of Keyviz from the **[GitHub Releases](https://github.com/mulaRahul/keyviz/releases)** page.
 
-*   **Windows:** Download the `.msi` installer, run it, and follow the steps.
+*   **Windows:** Download the `.msi` or `.exe` installer, run it, and follow the steps. The portable version (`_portable.exe`) runs without installation.
 *   **macOS:** Download the `.dmg`. 
     **Note:** Keyviz requires **Input Monitoring** and **Accessibility** permissions. Enable them here:
     `Settings > Privacy & Security > Input Monitoring & Accessibility`

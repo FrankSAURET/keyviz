@@ -1,9 +1,16 @@
 # À faire
 
-1. ⏳ Verr. Maj sous macOS et Linux : `caps_lock` toujours faux (seul Windows lit la bascule).
-2. ⏳ Traduction FR des chaînes nouvelles éventuelles (aucune dans ce lot).
+1. ⏳ Verr. Maj sous macOS et Linux : à essayer sur une vraie machine (compilé sous Windows seulement, hors cible).
 
 # Journal
+
+## v2.1.2 (build 2.1.2.3)
+
+1. ✅ Verr. Maj macOS : `CGEventSourceFlagsState(0) & 0x10000` (CoreGraphics, `kCGEventFlagMaskAlphaShift`). Linux : voyant `/sys/class/leds/*::capslock/brightness`, valable sous X11 et Wayland, sans droit particulier.
+2. ✅ Erreur `TS2578` corrigée : `@ts-expect-error` inutile retiré de `vite.config.ts`.
+3. ✅ Traductions : interface déjà complète (en/fr, aucune clé manquante, vérifié par script). `README.fr.md` créé, liens English · Français dans les deux README ; README anglais complété (claviers SVG, langue, MSI/exe/portable).
+4. ℹ️ CHANGELOG laissé en français (règle de Frank).
+5. ℹ️ Installeurs non reconstruits : le code Windows n'a pas changé depuis le build 2.1.2.2.
 
 ## v2.1.2 (build 2.1.2.2)
 
@@ -12,7 +19,7 @@
 3. ✅ « À propos » : `buildNumber` injecté par Vite (`define` `__BUILD_NUMBER__` depuis `package.json`), affiché seulement en développement (`import.meta.env.DEV`). Recherche de mise à jour : comparaison numérique (plus de « nouvelle version » 2.1.1 pour un 2.1.2).
 4. ✅ Version : retour au semver de l'auteur, `2.1.2` (`tauri.conf.json`, `about.tsx`), `buildNumber` `2.1.2.2`. Cibles `"all"` rétablies : MSI construit à nouveau.
 5. ✅ Construction : installeurs NSIS et MSI, version portable (exe seul, WebView2 requis).
-6. ℹ️ Erreur `TS2578` dans `vite.config.ts` (`@ts-expect-error` inutile) : antérieure, non traitée.
+6. ℹ️ Erreur `TS2578` dans `vite.config.ts` (`@ts-expect-error` inutile) : antérieure, corrigée au build 2.1.2.3.
 
 ## v2026.10.0 (build 2026.10.0.1) — publication
 

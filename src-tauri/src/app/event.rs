@@ -39,7 +39,32 @@ fn caps_lock_on() -> bool {
     unsafe { GetKeyState(VK_CAPITAL.0 as i32) & 1 != 0 }
 }
 
-#[cfg(not(target_os = "windows"))]
+#[cfg(target_os = "macos")]
+fn caps_lock_on() -> bool {
+    #[link(name = "CoreGraphics", kind = "framework")]
+    extern "C" {
+        fn CGEventSourceFlagsState(state_id: i32) -> u64;
+    }
+    // kCGEventSourceStateCombinedSessionState = 0, kCGEventFlagMaskAlphaShift = 0x10000
+    unsafe { CGEventSourceFlagsState(0) & 0x10000 != 0 }
+}
+
+// Linux: Caps Lock LED exposed by the kernel, works under X11 and Wayland
+#[cfg(target_os = "linux")]
+fn caps_lock_on() -> bool {
+    std::fs::read_dir("/sys/class/leds")
+        .map(|entries| {
+            entries.flatten().any(|entry| {
+                entry.file_name().to_string_lossy().ends_with("::capslock")
+                    && std::fs::read_to_string(entry.path().join("brightness"))
+                        .map(|value| value.trim() != "0")
+                        .unwrap_or(false)
+            })
+        })
+        .unwrap_or(false)
+}
+
+#[cfg(not(any(target_os = "windows", target_os = "macos", target_os = "linux")))]
 fn caps_lock_on() -> bool {
     false
 }
