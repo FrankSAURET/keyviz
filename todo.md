@@ -4,6 +4,13 @@
 
 # Journal
 
+## v2.1.2 (build 2.1.2.6)
+
+1. ✅ Audit sécurité de tout le code (Rust, rdev, frontal, WiX, workflows) : ni code malveillant ni télémétrie. Seul accès réseau de l'application : `api.github.com` sur clic « Vérifier » (mise à jour).
+2. ✅ Fichiers claviers SVG nettoyés avant injection (`sanitizeKeyboard` dans `src/lib/keyboard.tsx`) : retrait de `script`, `foreignObject`, `iframe`, `embed`, `object`, attributs `on*`, liens hors fichier (`href` autre que `#` ou image `data:`), `url()` externes, `@import`, `<set>`/`<animate>` visant un `on*` ou un `href`. Essayé sous jsdom avec un SVG piégé.
+3. ✅ `npm audit fix` : 31 failles → 6. Les 6 restantes (`braces`, haute) sont dans la chaîne de l'outil `shadcn` (ligne de commande, absent du paquet livré) ; `--force` rétrograderait `shadcn` en 1.0.0, non fait.
+4. ⏳ `src-tauri/2` : sortie d'un `npm install` enregistrée dans git par erreur, à trier par Frank.
+
 ## v2.1.2 (build 2.1.2.5)
 
 1. ✅ Figeage au clic sur l'icône de la zone de notification : les 3 figeages relevés par Windows (événement 1002, 13h36–13h38) viennent tous de l'instance lancée par la case « Launch keyviz » du MSI. Une instance lancée à la main ne fige pas (essayé par Frank).

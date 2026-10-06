@@ -13,6 +13,7 @@
 - Les lettres suivent aussi Verr. Maj : majuscule avec Verr. Maj ou Maj, minuscule avec les deux. Windows, macOS et Linux.
 - Numérotation revenue à celle du projet d'origine : 2.1.2 succède à 2.1.1.
 - « Rechercher les mises à jour » ne propose plus une version plus ancienne que celle installée.
+- Fichiers claviers SVG : tout contenu actif (scripts, gestionnaires d'événements, liens et ressources externes) est ignoré au chargement. Un clavier téléchargé ne peut plus exécuter de code dans keyviz.
 - Installeur MSI : plus de case « Lancer keyviz » en fin d'installation. L'instance qu'elle lançait se figeait au premier clic sur l'icône de la zone de notification, et keyviz ne démarrait plus ensuite. Lancer keyviz depuis le menu Démarrer après l'installation.
 
 ## 2026.10.0 (6 octobre 2026)

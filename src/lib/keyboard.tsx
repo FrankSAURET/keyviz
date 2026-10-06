@@ -94,6 +94,41 @@ function followTextColor(doc: Document) {
     });
 }
 
+// ───────────── Sanitizing ─────────────
+// The drawing ends up in the page as HTML: a keyboard file must not run code
+// (handlers, scripts) nor load or open anything outside the file.
+const UNSAFE_ELEMENTS = "script, foreignObject, iframe, embed, object, handler, listener";
+// links inside the file (#id) and embedded images only
+const SAFE_LINK = /^\s*(#|data:image\/(png|jpe?g|gif|webp|avif|bmp);)/i;
+// url() pointing outside the file
+const OUTSIDE_URL = /url\(\s*(?!['"]?\s*(#|data:image\/))/i;
+
+function sanitizeKeyboard(doc: Document) {
+    doc.querySelectorAll(UNSAFE_ELEMENTS).forEach((element) => element.remove());
+    doc.querySelectorAll("*").forEach((element) => {
+        // <animate>/<set> could write an event handler or a link
+        const animated = element.getAttribute("attributeName")?.trim().toLowerCase();
+        if (animated && (animated.startsWith("on") || animated.endsWith("href"))) {
+            element.remove();
+            return;
+        }
+        for (const attr of Array.from(element.attributes)) {
+            const name = attr.name.toLowerCase();
+            if (name.startsWith("on")
+                || (name.endsWith("href") && !SAFE_LINK.test(attr.value))
+                || OUTSIDE_URL.test(attr.value)) {
+                element.removeAttribute(attr.name);
+            }
+        }
+    });
+    // styles may load outside resources (@import, url())
+    doc.querySelectorAll("style").forEach((style) => {
+        style.textContent = (style.textContent ?? "")
+            .replace(/@import[^;]*;?/gi, "")
+            .replace(new RegExp(OUTSIDE_URL.source + "[^)]*\\)", "gi"), "none");
+    });
+}
+
 // ───────────── Frames ─────────────
 // On a sheet, each key has a dashed frame (rect) followed by its caption (text = key name).
 // The frame is the displayed area: scaling or moving the drawing inside it shows in Keyviz.
@@ -128,6 +163,7 @@ function parseKeyboard(svg: string): Map<string, KeyDrawing> {
         console.error("Invalid keyboard SVG");
         return drawings;
     }
+    sanitizeKeyboard(doc);
     followTextColor(doc);
     const defs = Array.from(doc.querySelectorAll("defs"), (d) => d.outerHTML).join("");
 
