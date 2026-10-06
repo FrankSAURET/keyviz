@@ -1,8 +1,15 @@
 # À faire
 
-1. ⏳ Verr. Maj sous macOS et Linux : à essayer sur une vraie machine (compilé sous Windows seulement, hors cible).
+1. ⏳ Verr. Maj sous macOS et Linux : à essayer sur une vraie machine (compile sur les deux cibles par GitHub Actions, jamais lancé).
 
 # Journal
+
+## v2.1.2 (build 2.1.2.4) — release
+
+1. ✅ `.github/workflows/build.yml` : lancement manuel (`gh workflow run build.yml -f tag=vX`), DMG universel (macos-latest) et deb/rpm/AppImage (ubuntu-22.04) par `tauri-action`, envoyés dans la release de l'étiquette.
+2. ✅ `winget.yml` limité à `mulaRahul/keyviz` : le fork ne tente plus de publier sur Winget.
+3. ✅ Release `v2.1.2` sur le fork : NSIS, MSI, portable exe et zip ; macOS et Linux par la construction GitHub.
+4. ℹ️ DMG non signé : clic droit > Ouvrir au premier lancement.
 
 ## v2.1.2 (build 2.1.2.3)
 
