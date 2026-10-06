@@ -6,6 +6,8 @@ on:
 
 jobs:
   publish:
+    # forks must not publish to the original Winget package
+    if: github.repository == 'mulaRahul/keyviz'
     runs-on: ubuntu-latest
     steps:
       - uses: vedantmgoyal2009/winget-releaser@v2
