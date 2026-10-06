@@ -7,6 +7,7 @@ import { readTextFile, writeTextFile } from "@tauri-apps/plugin-fs";
 import { open, save } from "@tauri-apps/plugin-dialog";
 import { toast } from "sonner";
 import i18next from "i18next";
+import { BUILTIN_ICONES } from "@/lib/builtin-keyboards";
 
 export const KEY_STYLE_STORE = "key_style_store";
 
@@ -170,7 +171,8 @@ const createKeyStyleStore = createSyncedStore<KeyStyleStore>(
             indicatorOffsetX: 50,
             indicatorOffsetY: 50,
         },
-        keyboard: { name: "", svg: "" },
+        // svg of a built-in keyboard is read from the app, not stored
+        keyboard: { name: BUILTIN_ICONES, svg: "" },
 
         setKeyboard: (keyboard) => set({ keyboard }),
         setAppearance: (appearance) => set((state) => ({ appearance: { ...state.appearance, ...appearance } })),

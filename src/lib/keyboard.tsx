@@ -5,6 +5,7 @@ import { BaseDirectory, exists, mkdir, readDir, readTextFile, writeTextFile } fr
 import { openPath } from "@tauri-apps/plugin-opener";
 import { useKeyStyle } from "@/stores/key_style";
 import { keymaps, type DisplayData, type KeyIcon } from "./keymaps";
+import { BUILTIN_GLYPHS, BUILTIN_ICONES, BUILTIN_ICONS, ICONES_SVG } from "./builtin-keyboards";
 
 // ───────────── Keyboard files ─────────────
 // A keyboard is one SVG file. Every element whose id (or data-key) is a key
@@ -20,8 +21,7 @@ const SVG_NS = "http://www.w3.org/2000/svg";
 const KEYBOARD_DIR = "keyboards";
 const baseDir = BaseDirectory.AppData;
 
-export const BUILTIN_ICONS = "";
-export const BUILTIN_GLYPHS = "builtin:glyphs";
+export { BUILTIN_GLYPHS, BUILTIN_ICONES, BUILTIN_ICONS } from "./builtin-keyboards";
 
 export interface KeyDisplay extends DisplayData {
     // the key comes from the keyboard file
@@ -214,7 +214,8 @@ export function resolveKeyDisplay(name: string, svg: string): KeyDisplay {
 
 // display data of a key, with the selected keyboard applied
 export function useKeyDisplay(name: string): KeyDisplay {
-    const svg = useKeyStyle((state) => state.keyboard?.svg ?? "");
+    // built-in file: always the copy shipped with this version, not the stored one
+    const svg = useKeyStyle((state) => state.keyboard?.name === BUILTIN_ICONES ? ICONES_SVG : state.keyboard?.svg ?? "");
     return useMemo(() => resolveKeyDisplay(name, svg), [name, svg]);
 }
 
@@ -292,6 +293,7 @@ export async function listUserKeyboards(): Promise<string[]> {
 export async function loadKeyboardSvg(name: string): Promise<string> {
     if (name === BUILTIN_ICONS) return "";
     if (name === BUILTIN_GLYPHS) return buildKeyboardTemplate("glyphs");
+    if (name === BUILTIN_ICONES) return ICONES_SVG;
     return readTextFile(`${KEYBOARD_DIR}/${name}`, { baseDir });
 }
 
@@ -300,6 +302,7 @@ export async function duplicateKeyboard(name: string): Promise<string> {
     const source = name === BUILTIN_ICONS ? buildKeyboardTemplate("icons") : await loadKeyboardSvg(name);
     const stem = name === BUILTIN_ICONS ? "icons"
         : name === BUILTIN_GLYPHS ? "glyphs"
+        : name === BUILTIN_ICONES ? "icones"
         : name.replace(/\.svg$/i, "");
     await mkdir(KEYBOARD_DIR, { baseDir, recursive: true });
     let fileName = `${stem} copy.svg`;

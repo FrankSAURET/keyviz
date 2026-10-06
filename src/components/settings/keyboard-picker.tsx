@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Item, ItemActions, ItemContent, ItemDescription, ItemTitle } from "@/components/ui/item";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectSeparator, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { BUILTIN_GLYPHS, BUILTIN_ICONS, duplicateKeyboard, listUserKeyboards, loadKeyboardSvg, openKeyboardFolder } from "@/lib/keyboard";
+import { BUILTIN_GLYPHS, BUILTIN_ICONES, BUILTIN_ICONS, duplicateKeyboard, listUserKeyboards, loadKeyboardSvg, openKeyboardFolder } from "@/lib/keyboard";
 import { useKeyStyle } from "@/stores/key_style";
 import { Copy01Icon, FolderOpenIcon, RefreshIcon } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon } from "@hugeicons/react";
@@ -73,7 +73,8 @@ export const KeyboardPicker = () => {
                 </SelectTrigger>
                 <SelectContent>
                     <SelectGroup>
-                        <SelectItem value={ICONS_VALUE}>{t("Icons (default)")}</SelectItem>
+                        <SelectItem value={BUILTIN_ICONES}>{t("Icones (default)")}</SelectItem>
+                        <SelectItem value={ICONS_VALUE}>{t("Classic icons")}</SelectItem>
                         <SelectItem value={BUILTIN_GLYPHS}>{t("Glyphs")}</SelectItem>
                     </SelectGroup>
                     {userKeyboards.length > 0 && <SelectSeparator />}
