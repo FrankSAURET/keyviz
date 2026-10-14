@@ -151,6 +151,18 @@ const createKeyEventStore = createSyncedStore<KeyEventStore>(
                 set({ pressedKeys });
                 return;
             }
+            // Maj + lettre non autorisée : saisie de majuscule, rien à afficher (Maj retiré aussi)
+            if (/^Key[A-Z]$/.test(event.name) && (state.filter === "modifiers" || !state.allowedKeys.includes(event.name))
+                && pressedKeys.length > 1 && pressedKeys.slice(0, -1).every(k => k === RawKey.ShiftLeft || k === RawKey.ShiftRight)) {
+                const groups = [...state.groups];
+                const last = groups.length - 1;
+                if (last >= 0) {
+                    groups[last] = { ...groups[last], keys: groups[last].keys.filter(k => k.name !== RawKey.ShiftLeft && k.name !== RawKey.ShiftRight) };
+                    if (groups[last].keys.length === 0) groups.pop();
+                }
+                set({ pressedKeys, groups });
+                return;
+            }
 
             let groups = [...state.groups];
             const last = groups.length - 1;

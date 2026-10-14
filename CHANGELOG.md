@@ -10,6 +10,7 @@
 
 ### Modification
 
+- Lettres non autorisées par le filtre : Maj + lettre n'affiche plus rien (ni Maj, ni la lettre).
 - Les lettres suivent aussi Verr. Maj : majuscule avec Verr. Maj ou Maj, minuscule avec les deux. Windows, macOS et Linux.
 - Numérotation revenue à celle du projet d'origine : 2.1.2 succède à 2.1.1.
 - « Rechercher les mises à jour » ne propose plus une version plus ancienne que celle installée.

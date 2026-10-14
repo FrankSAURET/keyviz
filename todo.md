@@ -1,8 +1,12 @@
 # À faire
 
-1. ⏳ Verr. Maj sous macOS et Linux : à essayer sur une vraie machine (compile sur les deux cibles par GitHub Actions, jamais lancé).
+1. ⬜ (rien en attente)
 
 # Journal
+
+## v2.1.2 (build 2.1.2.7)
+
+1. ✅ Maj + lettre non autorisée (filtre « modifiers » ou « custom ») : plus rien d'affiché. `onKeyPress` dans `src/stores/key_event.ts` retire Maj du groupe en cours et ignore la lettre. Ctrl+A et autres combinaisons inchangés. `tsc --noEmit` sans erreur.
 
 ## v2.1.2 (build 2.1.2.6)
 
