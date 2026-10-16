@@ -113,6 +113,8 @@
   "Display button and scroll icons next to the cursor": "Afficher les icônes des boutons et du défilement près du curseur",
   "Keep Indicator": "Garder l’indicateur",
   "Permanently show the icon beside the cursor": "Afficher en permanence l’icône près du curseur",
+  "Show Modifiers": "Afficher les modificateurs",
+  "Display Ctrl, Shift, Alt, AltGr and Win beside the indicator while held": "Afficher Ctrl, Maj, Alt, AltGr et Win à côté de l’indicateur tant qu’ils sont enfoncés",
   "Offset": "Décalage",
   "Space from the cursor to the indicator": "Distance entre le curseur et l’indicateur",
   "Offset linked": "Décalages liés",

@@ -8,7 +8,8 @@
 
 1. ✅ Modificateurs (Ctrl, Maj, Alt, AltGr, Win) affichés en pastilles à droite de l'indicateur souris tant qu'ils sont enfoncés. `modifierBadges` dans `src/components/mouse-indicator.tsx`, lecture de `pressedKeys`. Les pastilles restent visibles même si le rond est masqué (`visible`).
 2. ✅ Réglage `showModifiers` (défaut actif) dans `MouseSettings` (`key_style.ts`), interrupteur « Show Modifiers » sous « Keep Indicator », grisé si l'indicateur est désactivé. Absence de valeur (anciens réglages) = actif.
-3. ⏳ Traduction FR des 2 nouvelles chaînes (« Show Modifiers », description) : avant publication.
+3. ✅ Traduction FR des 2 nouvelles chaînes (`fr.json`).
+4. ✅ NSIS, MSI et portable reconstruits (`dist-installeurs/`, non versionné).
 
 ## v2.1.2 (build 2.1.2.7)
 
