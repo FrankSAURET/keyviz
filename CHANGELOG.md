@@ -7,6 +7,7 @@
 - Touche `< >` des claviers ISO (à gauche de W/Z) affichée, et présente dans le filtre des touches.
 - Installeur MSI et version portable (exe seul, sans installation) en plus de l'installeur habituel.
 - README en français (`README.fr.md`), lien entre les deux langues.
+- Souris : Ctrl, Maj, Alt, AltGr et Windows s'affichent à côté de l'indicateur du curseur tant qu'ils sont enfoncés. Désactivable dans Réglages > Souris > « Show Modifiers ».
 
 ### Modification
 

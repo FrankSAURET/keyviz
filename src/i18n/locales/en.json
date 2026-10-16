@@ -113,6 +113,8 @@
   "Display button and scroll icons next to the cursor": "Display button and scroll icons next to the cursor",
   "Keep Indicator": "Keep Indicator",
   "Permanently show the icon beside the cursor": "Permanently show the icon beside the cursor",
+  "Show Modifiers": "Show Modifiers",
+  "Display Ctrl, Shift, Alt, AltGr and Win beside the indicator while held": "Display Ctrl, Shift, Alt, AltGr and Win beside the indicator while held",
   "Offset": "Offset",
   "Space from the cursor to the indicator": "Space from the cursor to the indicator",
   "Offset linked": "Offset linked",

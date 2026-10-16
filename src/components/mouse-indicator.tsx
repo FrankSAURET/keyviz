@@ -1,5 +1,6 @@
 import { useKeyEvent } from "@/stores/key_event";
 import { useKeyStyle } from "@/stores/key_style";
+import { RawKey } from "@/types/event";
 import { JSX } from "react";
 
 
@@ -50,10 +51,24 @@ const mouseIcons: Record<string, JSX.Element> = {
         </svg>
     )
 };
-export const MouseIndicator = () => {
+// Modifier badges, in display order; each matches any of its physical keys
+const modifierBadges: { label: string; keys: string[]; }[] = [
+    { label: "Ctrl", keys: [RawKey.ControlLeft, RawKey.ControlRight] },
+    { label: "Maj", keys: [RawKey.ShiftLeft, RawKey.ShiftRight] },
+    { label: "Alt", keys: [RawKey.Alt] },
+    { label: "AltGr", keys: [RawKey.AltGr] },
+    { label: "Win", keys: [RawKey.MetaLeft, RawKey.MetaRight] },
+];
+
+export const MouseIndicator = ({ visible }: { visible: boolean; }) => {
     const pressedButton = useKeyEvent(state => state.pressedMouseButton);
     const wheel = useKeyEvent(state => state.mouse.wheel);
+    const pressedKeys = useKeyEvent(state => state.pressedKeys);
     const style = useKeyStyle(state => state.mouse);
+
+    const badges = style.showModifiers === false
+        ? []
+        : modifierBadges.filter(b => b.keys.some(k => pressedKeys.includes(k)));
 
     let icon = "Default";
 
@@ -67,17 +82,34 @@ export const MouseIndicator = () => {
 
     return (
         <div
-            className="bg-black/50 text-white"
-            style={{
-                width: style.indicatorSize * 0.92,
-                height: style.indicatorSize,
-                marginTop: style.indicatorOffsetY,
-                marginLeft: style.indicatorOffsetX,
-                borderRadius: "45%",
-                padding: style.indicatorSize * 0.2,
-            }}
+            className="flex items-center gap-2"
+            style={{ marginTop: style.indicatorOffsetY, marginLeft: style.indicatorOffsetX }}
         >
-            {mouseIcons[icon]}
+            <div
+                className="bg-black/50 text-white shrink-0 transition-opacity duration-200"
+                style={{
+                    width: style.indicatorSize * 0.92,
+                    height: style.indicatorSize,
+                    borderRadius: "45%",
+                    padding: style.indicatorSize * 0.2,
+                    opacity: visible ? 1 : 0,
+                }}
+            >
+                {mouseIcons[icon]}
+            </div>
+            {badges.length > 0 && (
+                <div className="flex flex-col gap-1">
+                    {badges.map(b => (
+                        <span
+                            key={b.label}
+                            className="bg-black/50 text-white font-semibold leading-none rounded-md px-2 py-1 whitespace-nowrap"
+                            style={{ fontSize: Math.max(10, style.indicatorSize * 0.3) }}
+                        >
+                            {b.label}
+                        </span>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }

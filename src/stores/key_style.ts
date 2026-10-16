@@ -82,6 +82,8 @@ export interface MouseSettings {
     indicatorSize: number;
     indicatorOffsetX: number;
     indicatorOffsetY: number;
+    // Ctrl, Maj, Alt, AltGr, Win shown beside the indicator while held
+    showModifiers: boolean;
 }
 
 export interface KeyStyleState {
@@ -170,6 +172,7 @@ const createKeyStyleStore = createSyncedStore<KeyStyleStore>(
             indicatorSize: 50,
             indicatorOffsetX: 50,
             indicatorOffsetY: 50,
+            showModifiers: true,
         },
         // svg of a built-in keyboard is read from the app, not stored
         keyboard: { name: BUILTIN_ICONES, svg: "" },

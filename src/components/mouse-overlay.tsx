@@ -119,13 +119,9 @@ export const MouseOverlay = () => {
                 )}
 
                 {style.showIndicator &&
-                    <motion.div
-                        className="absolute left-1/2 top-1/2"
-                        animate={{ opacity: show || style.keepIndicator || wheel !== 0 ? 1 : 0 }}
-                        transition={{ duration: 0.2 }}
-                    >
-                        <MouseIndicator />
-                    </motion.div>
+                    <div className="absolute left-1/2 top-1/2">
+                        <MouseIndicator visible={show || style.keepIndicator || wheel !== 0} />
+                    </div>
                 }
             </div>
         </div>

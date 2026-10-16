@@ -136,6 +136,24 @@ export const MouseSettings = () => {
         <Item variant="muted">
             <ItemContent>
                 <ItemTitle>
+                    <HugeiconsIcon icon={KeyboardIcon} size="1em" /> {t("Show Modifiers")}
+                </ItemTitle>
+                <ItemDescription>
+                    {t("Display Ctrl, Shift, Alt, AltGr and Win beside the indicator while held")}
+                </ItemDescription>
+            </ItemContent>
+            <ItemActions>
+                <Switch
+                    checked={mouse.showModifiers !== false}
+                    onCheckedChange={(showModifiers) => setMouseStyle({ showModifiers })}
+                    disabled={!mouse.showIndicator}
+                />
+            </ItemActions>
+        </Item>
+
+        <Item variant="muted">
+            <ItemContent>
+                <ItemTitle>
                     <HugeiconsIcon icon={CursorEdit01Icon} size="1em" /> Size
                 </ItemTitle>
             </ItemContent>
